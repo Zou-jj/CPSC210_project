@@ -13,8 +13,7 @@ with my friends when I was a child, and I want to recall some of those precious 
 
 ##User Stories
 
-- As a user, I want to create a list of battle teams of different forces.
-- As a user, I want to add customized warriors to a troop.
-- As a user, I want to modify warriors' ability.
+- As a user, I want to be able to select a troop and add a new warrior to the troop
+- As a user, I want to select a warrior and modify its ability.
 - As a user, I want to select a troop and view all warriors in that troop.
-- As a user, I want to place warriors on the battle ground in specific place.
+- As a user, I want to view all troops in the game.

@@ -15,6 +15,8 @@ public class World {
         initUndead();
     }
 
+    // MODIFIES: this
+    // EFFECTS: initialize an elf troop
     public void initElf() {
         Troop elf = new Troop("elf");
         Warrior elfArcher = new Warrior("elf archer");
@@ -28,6 +30,8 @@ public class World {
         races.add(elf);
     }
 
+    // MODIFIES: this
+    // EFFECTS: initialize an undead troop
     public void initUndead() {
         Troop undead = new Troop("undead");
         Warrior undeadRider = new Warrior("undead rider");
@@ -45,6 +49,8 @@ public class World {
         return races.size();
     }
 
+    // REQUIRES: index >= 0 and index < getWorldSize
+    // EFFECTS: return the troop of given index in world
     public Troop getTroopByIndex(int index) {
         return races.get(index);
     }

@@ -11,12 +11,15 @@ public class GamePanel {
     private final Scanner input;
     private final World world;
 
+    // EFFECTS: initialize the world and open the main menu
     public GamePanel() {
         world = new World();
         input = new Scanner(System.in);
         selectFromMenu();
     }
 
+    // MODIFIES: this
+    // EFFECTS: display the main menu and process user input
     private void selectFromMenu() {
         boolean quit = false;
 
@@ -38,6 +41,8 @@ public class GamePanel {
         System.out.println("\nGoodbye!");
     }
 
+    // MODIFIES: this
+    // EFFECTS: display the edit troop menu and process user input
     private void editTroops() {
         boolean quit = false;
 
@@ -65,7 +70,8 @@ public class GamePanel {
         }
     }
 
-    // EFFECTS: prompts user to select chequing or savings account and returns it
+    // MODIFIES: this
+    // EFFECTS: prompts user to select a troop to edit
     private void selectTroops() {
         int selection;
         boolean quit = false;
@@ -89,6 +95,7 @@ public class GamePanel {
         }
     }
 
+    // EFFECTS: list all troops in world and process user input
     private void listTroops() {
         String selection;
         boolean quit = false;
@@ -110,6 +117,8 @@ public class GamePanel {
 
     }
 
+    // MODIFIES: this
+    // EFFECTS: prompts user to select operation on the troop being editing
     private void editTroop(Troop troop) {
         boolean quit = false;
 
@@ -137,6 +146,7 @@ public class GamePanel {
         }
     }
 
+    // EFFECTS: displays operations to the troop being editing
     private void displayEditingTroop(Troop troop) {
         System.out.println("\nEditing: " + troop.getRace());
         System.out.println("\ta -> add a " + troop.getRace() + " warrior");
@@ -145,6 +155,8 @@ public class GamePanel {
         System.out.println("\tq -> quit");
     }
 
+    // MODIFIES: this
+    // EFFECTS: prompts user to select a warrior to edit
     private void selectWarrior(Troop troop) {
         int selection;
         boolean quit = false;
@@ -168,6 +180,8 @@ public class GamePanel {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: prompts user to select operation on the warrior being editing
     private void editWarrior(Warrior warrior) {
         boolean quit = false;
 
@@ -195,6 +209,8 @@ public class GamePanel {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: add a warrior to the given troop
     private void addWarrior(Troop troop) {
         Warrior newWarrior;
         String name;
@@ -208,6 +224,7 @@ public class GamePanel {
         editWarriorDefense(newWarrior);
     }
 
+    // EFFECTS: list all warriors in the given troop and process user input
     private void listWarriors(Troop troop) {
         String selection;
         boolean quit = false;
@@ -228,6 +245,8 @@ public class GamePanel {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: prompts user to rename the given warrior
     private void renameWarrior(Warrior warrior) {
         System.out.println("Warrior's new name: ");
         String selection = input.next();
@@ -235,6 +254,8 @@ public class GamePanel {
         System.out.println("Warrior renamed to " + warrior.getName());
     }
 
+    // MODIFIES: this
+    // EFFECTS: prompts user to edit attack of the given warrior
     private void editWarriorAttack(Warrior warrior) {
         boolean quit = false;
         int attack;
@@ -252,6 +273,8 @@ public class GamePanel {
         System.out.println("Warrior's attack changed to " + warrior.getAttack());
     }
 
+    // MODIFIES: this
+    // EFFECTS: prompts user to edit defense of the given warrior
     private void editWarriorDefense(Warrior warrior) {
         boolean quit = false;
         int defense;
@@ -269,6 +292,7 @@ public class GamePanel {
         System.out.println("Warrior's defense changed to " + warrior.getAttack());
     }
 
+    // EFFECTS: displays operations to the warrior being editing
     private void displayEditingWarrior(Warrior warrior) {
         System.out.println("\nEditing: " + warrior.getName());
         System.out.println("\tattack: " + warrior.getAttack());

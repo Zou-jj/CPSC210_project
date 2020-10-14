@@ -19,10 +19,14 @@ public class Troop {
         return warriors.size();
     }
 
+    // REQUIRES: index >= 0 and index < getTroopSize
+    // EFFECTS: return the warrior of given index in troop
     public Warrior getWarriorByIndex(int index) {
         return warriors.get(index);
     }
 
+    // MODIFIES: this
+    // EFFECTS: add the given warrior to the end of troop
     public void addWarrior(Warrior w) {
         warriors.add(w);
     }
