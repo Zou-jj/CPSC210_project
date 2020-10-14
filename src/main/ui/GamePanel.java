@@ -209,7 +209,7 @@ public class GamePanel {
         }
     }
 
-    // MODIFIES: this
+    // MODIFIES: this, troop
     // EFFECTS: add a warrior to the given troop
     private void addWarrior(Troop troop) {
         Warrior newWarrior;
@@ -245,7 +245,7 @@ public class GamePanel {
         }
     }
 
-    // MODIFIES: this
+    // MODIFIES: this, warrior
     // EFFECTS: prompts user to rename the given warrior
     private void renameWarrior(Warrior warrior) {
         System.out.println("Warrior's new name: ");
@@ -254,7 +254,7 @@ public class GamePanel {
         System.out.println("Warrior renamed to " + warrior.getName());
     }
 
-    // MODIFIES: this
+    // MODIFIES: this, warrior
     // EFFECTS: prompts user to edit attack of the given warrior
     private void editWarriorAttack(Warrior warrior) {
         boolean quit = false;
@@ -273,7 +273,7 @@ public class GamePanel {
         System.out.println("Warrior's attack changed to " + warrior.getAttack());
     }
 
-    // MODIFIES: this
+    // MODIFIES: this, warrior
     // EFFECTS: prompts user to edit defense of the given warrior
     private void editWarriorDefense(Warrior warrior) {
         boolean quit = false;
