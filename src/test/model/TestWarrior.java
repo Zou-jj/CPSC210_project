@@ -18,15 +18,27 @@ class TestWarrior {
     }
 
     @Test
-    void testSetAttack() {
+    void testSetPositiveAttack() {
         elfArcher.setAttack(ATTACK);
         assertEquals(ATTACK, elfArcher.getAttack());
     }
 
     @Test
-    void testSetDefense() {
+    void testSetNegativeAttack() {
+        elfArcher.setAttack(-1);
+        assertEquals(0, elfArcher.getAttack());
+    }
+
+    @Test
+    void testSetPositiveDefense() {
         elfArcher.setDefense(DEFENSE);
         assertEquals(DEFENSE, elfArcher.getDefense());
+    }
+
+    @Test
+    void testSetNegativeDefense() {
+        elfArcher.setDefense(-1);
+        assertEquals(0, elfArcher.getDefense());
     }
 
     @Test

@@ -30,17 +30,23 @@ public class Warrior {
         this.name = name;
     }
 
-    // REQUIRES: attack >= 0
     // MODIFIES: this
     // EFFECTS: set warrior's attack to given value
     public void setAttack(int attack) {
-        this.attack = attack;
+        if (attack > 0) {
+            this.attack = attack;
+        } else {
+            this.attack = 0;
+        }
     }
 
-    // REQUIRES: defense >= 0
     // MODIFIES: this
     // EFFECTS: set warrior's defense to given value
     public void setDefense(int defense) {
-        this.defense = defense;
+        if (defense > 0) {
+            this.defense = defense;
+        } else {
+            this.defense = 0;
+        }
     }
 }

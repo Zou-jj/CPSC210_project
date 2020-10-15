@@ -1,7 +1,6 @@
 # A battle simulator
 
-**Support functions**:
-- Play simulated battle game with your friend
+This app is a prototype of a battle simulation game
 
 **Possible user**:
 - *Gamers*
@@ -9,7 +8,8 @@
 - Scholars who want to run simulation
 
 The reason I am interested in making a battle simulator is that I played some really interesting flash games
-with my friends when I was a child, and I want to recall some of those precious memory.
+with my friends when I was a child, and I am a huge fan of Lord of the Rings.
+So I want to recall some of those precious memory and make an app to simulate some classic scenes from the Lord of the Rings.
 
 ##User Stories
 
