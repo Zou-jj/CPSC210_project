@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GamePanel {
-    private final Scanner input;
-    private final World world;
+    private Scanner input;
+    private World world;
 
     // EFFECTS: initialize the world and open the main menu
     public GamePanel() {
