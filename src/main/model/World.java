@@ -1,48 +1,17 @@
 package model;
 
-import model.Troop;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
 
-import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
 
-public class World {
-    private ArrayList<Troop> races;
+// Represents a game world with some troops
+public class World implements Writable {
+    protected ArrayList<Troop> races;
 
     public World() {
         races = new ArrayList<>();
-        initElf();
-        initUndead();
-    }
-
-    // MODIFIES: this
-    // EFFECTS: initialize an elf troop
-    public void initElf() {
-        Troop elf = new Troop("elf");
-        Warrior elfArcher = new Warrior("elf archer");
-        elfArcher.setAttack(100);
-        elfArcher.setDefense(20);
-        elf.addWarrior(elfArcher);
-        Warrior elfRanger = new Warrior("elf ranger");
-        elfRanger.setAttack(70);
-        elfRanger.setDefense(50);
-        elf.addWarrior(elfRanger);
-        races.add(elf);
-    }
-
-    // MODIFIES: this
-    // EFFECTS: initialize an undead troop
-    public void initUndead() {
-        Troop undead = new Troop("undead");
-        Warrior undeadRider = new Warrior("undead rider");
-        undeadRider.setAttack(50);
-        undeadRider.setDefense(80);
-        undead.addWarrior(undeadRider);
-        Warrior undeadBat = new Warrior("undead bat");
-        undeadBat.setAttack(100);
-        undeadBat.setDefense(10);
-        undead.addWarrior(undeadBat);
-        races.add(undead);
     }
 
     public int getWorldSize() {
@@ -53,5 +22,28 @@ public class World {
     // EFFECTS: return the troop of given index in world
     public Troop getTroopByIndex(int index) {
         return races.get(index);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: add the given warrior to the end of troop
+    public void addTroop(Troop t) {
+        races.add(t);
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("troops", troopsToJson());
+        return json;
+    }
+
+    private JSONArray troopsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Troop t : races) {
+            jsonArray.put(t.toJson());
+        }
+
+        return jsonArray;
     }
 }

@@ -1,6 +1,10 @@
 package model;
 
-public class Warrior {
+import org.json.JSONObject;
+import persistence.Writable;
+
+// Represents a warrior with some abilities
+public class Warrior implements Writable {
     private String name;
     private int attack;
     private int defense;
@@ -48,5 +52,14 @@ public class Warrior {
         } else {
             this.defense = 0;
         }
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("attack", attack);
+        json.put("defense", defense);
+        return json;
     }
 }

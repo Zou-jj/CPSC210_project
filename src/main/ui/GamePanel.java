@@ -3,18 +3,28 @@ package ui;
 import model.Troop;
 import model.Warrior;
 import model.World;
+import model.InitWorld;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
-import java.util.ArrayList;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
+// Represent a console gaming panel
 public class GamePanel {
+    private static final String JSON_STORE = "./data/world.json";
     private Scanner input;
     private World world;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // EFFECTS: initialize the world and open the main menu
     public GamePanel() {
-        world = new World();
         input = new Scanner(System.in);
+        world = new InitWorld();
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         selectFromMenu();
     }
 
@@ -26,11 +36,17 @@ public class GamePanel {
         while (!quit) {
             System.out.println("\nMain menu:");
             System.out.println("\tt -> troops");
+            System.out.println("\ts -> save game");
+            System.out.println("\tl -> load game");
             System.out.println("\tq -> quit");
             String keyIn = input.next();
             keyIn = keyIn.toLowerCase();
             if (keyIn.equals("t")) {
                 editTroops();
+            } else if (keyIn.equals("s")) {
+                saveWorld();
+            } else if (keyIn.equals("l")) {
+                loadWorld();
             } else if (keyIn.equals("q")) {
                 quit = true;
             } else {
@@ -289,7 +305,7 @@ public class GamePanel {
                 System.out.println("enter a positive value\n");
             }
         }
-        System.out.println("Warrior's defense changed to " + warrior.getAttack());
+        System.out.println("Warrior's defense changed to " + warrior.getDefense());
     }
 
     // EFFECTS: displays operations to the warrior being editing
@@ -303,4 +319,23 @@ public class GamePanel {
         System.out.println("\tq -> quit");
     }
 
+    private void saveWorld() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(world);
+            jsonWriter.close();
+            System.out.println("Saved game to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    private void loadWorld() {
+        try {
+            world = jsonReader.read();
+            System.out.println("Loaded game from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
 }

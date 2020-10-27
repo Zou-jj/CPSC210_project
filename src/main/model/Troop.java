@@ -1,8 +1,13 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 
-public class Troop {
+// Represents a troop having a collection of warriors
+public class Troop implements Writable {
     private String race;
     private ArrayList<Warrior> warriors;
 
@@ -31,4 +36,22 @@ public class Troop {
         warriors.add(w);
     }
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("race", race);
+        json.put("warriors", warriorsToJson());
+        return json;
+    }
+
+    private JSONArray warriorsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Warrior w : warriors) {
+            jsonArray.put(w.toJson());
+        }
+
+        return jsonArray;
+    }
 }
+
