@@ -1,15 +1,18 @@
 package persistence;
 
-import model.InitWorld;
+import model.Troop;
 import model.World;
 import org.junit.jupiter.api.Test;
+import ui.GamePanel;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
-class JsonWriterTest extends TestJson {
+public class TestJsonWriter {
 
     @Test
     void testWriterInvalidFile() {
@@ -41,9 +44,11 @@ class JsonWriterTest extends TestJson {
     }
 
     @Test
-    void testWriterGeneralWorkroom() {
+    void testWriterGeneralWorld() {
         try {
-            InitWorld world = new InitWorld();
+            World world = new World();
+            GamePanel.initElf(world);
+            GamePanel.initUndead(world);
             JsonWriter writer = new JsonWriter("./data/testWriterGeneralWorld.json");
             writer.open();
             writer.write(world);
@@ -51,11 +56,25 @@ class JsonWriterTest extends TestJson {
 
             JsonReader reader = new JsonReader("./data/testWriterGeneralWorld.json");
             world = reader.read();
-            assertEquals("My work room", wr.getName());
-            List<Thingy> thingies = wr.getThingies();
-            assertEquals(2, thingies.size());
-            checkThingy("saw", Category.METALWORK, thingies.get(0));
-            checkThingy("needle", Category.STITCHING, thingies.get(1));
+            assertEquals("elf", world.getTroopByIndex(0).getRace());
+            assertEquals("undead", world.getTroopByIndex(1).getRace());
+            List<Troop> troops = new ArrayList<>();
+            troops.add(world.getTroopByIndex(0));
+            troops.add(world.getTroopByIndex(1));
+            assertEquals(2, troops.size());
+
+//            protected void checkTroop(String race,int size, Troop troop, List< Warrior > warriors) {
+//                assertEquals(race, troop.getRace());
+//                assertEquals(size, troop.getTroopSize());
+//                for (Warrior warrior : warriors) {
+//
+//                }
+//                assertEquals(attack, warrior.getAttack());
+//                assertEquals(defense, warrior.getDefense());
+//            }
+//
+//            checkThingy("saw", Category.METALWORK, thingies.get(0));
+//            checkThingy("needle", Category.STITCHING, thingies.get(1));
 
         } catch (IOException e) {
             fail("Exception should not have been thrown");

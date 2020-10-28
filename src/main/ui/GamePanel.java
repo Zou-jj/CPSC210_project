@@ -3,7 +3,6 @@ package ui;
 import model.Troop;
 import model.Warrior;
 import model.World;
-import model.InitWorld;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -22,10 +21,40 @@ public class GamePanel {
     // EFFECTS: initialize the world and open the main menu
     public GamePanel() {
         input = new Scanner(System.in);
-        world = new InitWorld();
+        world = new World();
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
         selectFromMenu();
+    }
+
+    // EFFECTS: initialize an elf troop
+    public static World initElf(World world) {
+        Troop elf = new Troop("elf");
+        Warrior elfArcher = new Warrior("elf archer");
+        elfArcher.setAttack(100);
+        elfArcher.setDefense(20);
+        elf.addWarrior(elfArcher);
+        Warrior elfRanger = new Warrior("elf ranger");
+        elfRanger.setAttack(70);
+        elfRanger.setDefense(50);
+        elf.addWarrior(elfRanger);
+        world.addTroop(elf);
+        return world;
+    }
+
+    // EFFECTS: initialize an undead troop
+    public static World initUndead(World world) {
+        Troop undead = new Troop("undead");
+        Warrior undeadRider = new Warrior("undead rider");
+        undeadRider.setAttack(50);
+        undeadRider.setDefense(80);
+        undead.addWarrior(undeadRider);
+        Warrior undeadBat = new Warrior("undead bat");
+        undeadBat.setAttack(100);
+        undeadBat.setDefense(10);
+        undead.addWarrior(undeadBat);
+        world.addTroop(undead);
+        return world;
     }
 
     // MODIFIES: this

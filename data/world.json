@@ -1,0 +1,37 @@
+{"troops": [
+    {
+        "race": "elf",
+        "warriors": [
+            {
+                "defense": 20,
+                "attack": 100,
+                "name": "elf archer"
+            },
+            {
+                "defense": 50,
+                "attack": 70,
+                "name": "elf ranger"
+            },
+            {
+                "defense": 101,
+                "attack": 100,
+                "name": "zjj"
+            }
+        ]
+    },
+    {
+        "race": "undead",
+        "warriors": [
+            {
+                "defense": 80,
+                "attack": 50,
+                "name": "undead rider"
+            },
+            {
+                "defense": 10,
+                "attack": 100,
+                "name": "undead bat"
+            }
+        ]
+    }
+]}
