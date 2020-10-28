@@ -22,11 +22,14 @@ public class GamePanel {
     public GamePanel() {
         input = new Scanner(System.in);
         world = new World();
+        initElf(world);
+        initUndead(world);
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
         selectFromMenu();
     }
 
+    // MODIFIES: world
     // EFFECTS: initialize an elf troop
     public static World initElf(World world) {
         Troop elf = new Troop("elf");
@@ -42,6 +45,7 @@ public class GamePanel {
         return world;
     }
 
+    // MODIFIES: world
     // EFFECTS: initialize an undead troop
     public static World initUndead(World world) {
         Troop undead = new Troop("undead");
@@ -348,6 +352,7 @@ public class GamePanel {
         System.out.println("\tq -> quit");
     }
 
+    // EFFECTS: saves the game world to file
     private void saveWorld() {
         try {
             jsonWriter.open();
@@ -359,6 +364,8 @@ public class GamePanel {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: loads game world from file
     private void loadWorld() {
         try {
             world = jsonReader.read();
