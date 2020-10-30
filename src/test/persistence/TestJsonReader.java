@@ -52,3 +52,10 @@ public class TestJsonReader {
         }
     }
 }
+
+/*
+ *Title:JsonSerializationDemo
+ *Author:Paul Carter
+ *Date:Oct 17, 2020
+ *Availability:https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+ */

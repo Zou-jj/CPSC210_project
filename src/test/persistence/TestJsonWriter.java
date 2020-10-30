@@ -12,7 +12,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class TestJsonWriter {
+public class TestJsonWriter extends TestJson {
 
     @Test
     void testWriterInvalidFile() {
@@ -58,26 +58,22 @@ public class TestJsonWriter {
             world = reader.read();
             assertEquals("elf", world.getTroopByIndex(0).getRace());
             assertEquals("undead", world.getTroopByIndex(1).getRace());
-            List<Troop> troops = new ArrayList<>();
-            troops.add(world.getTroopByIndex(0));
-            troops.add(world.getTroopByIndex(1));
-            assertEquals(2, troops.size());
-
-//            protected void checkTroop(String race,int size, Troop troop, List< Warrior > warriors) {
-//                assertEquals(race, troop.getRace());
-//                assertEquals(size, troop.getTroopSize());
-//                for (Warrior warrior : warriors) {
-//
-//                }
-//                assertEquals(attack, warrior.getAttack());
-//                assertEquals(defense, warrior.getDefense());
-//            }
-//
-//            checkThingy("saw", Category.METALWORK, thingies.get(0));
-//            checkThingy("needle", Category.STITCHING, thingies.get(1));
+            assertEquals(2, world.getTroopByIndex(0).getTroopSize());
+            assertEquals(2, world.getTroopByIndex(1).getTroopSize());
+            checkWarrior("elf archer", 100, 20, world.getTroopByIndex(0).getWarriorByIndex(0));
+            checkWarrior("elf ranger", 70, 50, world.getTroopByIndex(0).getWarriorByIndex(1));
+            checkWarrior("undead rider", 50, 80, world.getTroopByIndex(1).getWarriorByIndex(0));
+            checkWarrior("undead bat", 100, 10, world.getTroopByIndex(1).getWarriorByIndex(1));
 
         } catch (IOException e) {
             fail("Exception should not have been thrown");
         }
     }
 }
+
+/*
+ *Title:JsonSerializationDemo
+ *Author:Paul Carter
+ *Date:Oct 17, 2020
+ *Availability:https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+ */

@@ -44,6 +44,7 @@ public class Troop implements Writable {
         return json;
     }
 
+    // EFFECTS: returns warriors in this troop as a JSON array
     private JSONArray warriorsToJson() {
         JSONArray jsonArray = new JSONArray();
 
@@ -54,4 +55,11 @@ public class Troop implements Writable {
         return jsonArray;
     }
 }
+
+/*
+ *Title:JsonSerializationDemo
+ *Author:Paul Carter
+ *Date:Oct 17, 2020
+ *Availability:https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+ */
 

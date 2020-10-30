@@ -37,6 +37,7 @@ public class World implements Writable {
         return json;
     }
 
+    // EFFECTS: returns troops in this game world as a JSON array
     private JSONArray troopsToJson() {
         JSONArray jsonArray = new JSONArray();
 
@@ -47,3 +48,10 @@ public class World implements Writable {
         return jsonArray;
     }
 }
+
+/*
+ *Title:JsonSerializationDemo
+ *Author:Paul Carter
+ *Date:Oct 17, 2020
+ *Availability:https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+ */
