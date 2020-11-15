@@ -3,7 +3,6 @@ package persistence;
 import model.Troop;
 import model.World;
 import org.junit.jupiter.api.Test;
-import ui.GamePanel;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -37,7 +36,7 @@ public class TestJsonReader {
     }
 
     @Test
-    void testReaderGeneralWorkRoom() {
+    void testReaderGeneralWorld() {
         JsonReader reader = new JsonReader("./data/testReaderGeneralWorld.json");
         try {
             World world = reader.read();

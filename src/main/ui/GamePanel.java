@@ -31,7 +31,7 @@ public class GamePanel {
 
     // MODIFIES: world
     // EFFECTS: initialize an elf troop
-    public static World initElf(World world) {
+    public static void initElf(World world) {
         Troop elf = new Troop("elf");
         Warrior elfArcher = new Warrior("elf archer");
         elfArcher.setAttack(100);
@@ -42,12 +42,11 @@ public class GamePanel {
         elfRanger.setDefense(50);
         elf.addWarrior(elfRanger);
         world.addTroop(elf);
-        return world;
     }
 
     // MODIFIES: world
     // EFFECTS: initialize an undead troop
-    public static World initUndead(World world) {
+    public static void initUndead(World world) {
         Troop undead = new Troop("undead");
         Warrior undeadRider = new Warrior("undead rider");
         undeadRider.setAttack(50);
@@ -58,7 +57,6 @@ public class GamePanel {
         undeadBat.setDefense(10);
         undead.addWarrior(undeadBat);
         world.addTroop(undead);
-        return world;
     }
 
     // MODIFIES: this
