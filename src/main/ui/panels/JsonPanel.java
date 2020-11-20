@@ -1,6 +1,6 @@
 package ui.panels;
 
-import sound.MidiSynth;
+import ui.sound.MidiSynth;
 import ui.WarSim;
 
 import javax.swing.*;

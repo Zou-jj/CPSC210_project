@@ -3,7 +3,7 @@ package ui.panels;
 import model.Troop;
 import model.Warrior;
 import model.World;
-import sound.MidiSynth;
+import ui.sound.MidiSynth;
 
 import javax.swing.*;
 import java.awt.*;

@@ -5,7 +5,7 @@ import model.Warrior;
 import model.World;
 import persistence.JsonReader;
 import persistence.JsonWriter;
-import sound.MidiSynth;
+import ui.sound.MidiSynth;
 import ui.panels.JsonPanel;
 import ui.panels.TroopPanel;
 

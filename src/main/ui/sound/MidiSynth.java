@@ -1,4 +1,4 @@
-package sound;
+package ui.sound;
 
 /*
  * @(#)MidiSynth.java	1.15	99/12/03
@@ -64,7 +64,7 @@ public class MidiSynth {
         setupChannels();
     }
 
-    // EFFECTS: synthesizes sound given instrument, note, and velocity
+    // EFFECTS: synthesizes ui.sound given instrument, note, and velocity
     public void play(int instrument, int note, int velocity) {
         ChannelData channelData = getChannelData(instrument);
         MidiChannel midiChannel = channelData.getChannel();
