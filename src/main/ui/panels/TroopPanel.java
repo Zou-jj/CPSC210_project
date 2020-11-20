@@ -1,8 +1,8 @@
 package ui.panels;
 
-import model.Game;
 import model.Troop;
 import model.Warrior;
+import model.World;
 import sound.MidiSynth;
 
 import javax.swing.*;
@@ -13,6 +13,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
 public class TroopPanel extends JPanel implements ActionListener, FocusListener {
+    public World world;
     public Troop troop;
 
     private MidiSynth midiSynth;
@@ -23,10 +24,10 @@ public class TroopPanel extends JPanel implements ActionListener, FocusListener 
     protected JTextArea textArea;
     static final int GAP = 10;
 
-    public TroopPanel(Troop troop) {
+    public TroopPanel(World world, int index) {
         super();
-        this.troop = troop;
-        setPreferredSize(new Dimension(Game.WIDTH, Game.HEIGHT));
+        this.world = world;
+        this.troop = world.getTroopByIndex(index);
         setLayout(new GridLayout(0, 1));
 
         nameField = new JTextField(50);
@@ -41,6 +42,10 @@ public class TroopPanel extends JPanel implements ActionListener, FocusListener 
 
         initializeSound();
 
+    }
+
+    public void updateTroop(World world, int index) {
+        this.troop = world.getTroopByIndex(index);
     }
 
     protected JComponent createEntryFields() {

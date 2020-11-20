@@ -11,11 +11,6 @@
                 "defense": 50,
                 "attack": 70,
                 "name": "elf ranger"
-            },
-            {
-                "defense": 0,
-                "attack": 0,
-                "name": "hello"
             }
         ]
     },

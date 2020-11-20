@@ -1,26 +1,35 @@
 package ui;
 
-import model.Game;
 import model.Troop;
+import model.Warrior;
 import model.World;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 import sound.MidiSynth;
 import ui.panels.JsonPanel;
 import ui.panels.TroopPanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 // represent a war simulator game
 public class WarSim extends JFrame {
-    private Troop elf;
-    private Troop undead;
-    private Game game;
+
     private World world;
+
+    public static final int WIDTH = 800;
+    public static final int HEIGHT = 600;
+
+    public static final String JSON_STORE = "./data/world.json";
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     private MidiSynth midiSynth;
 
-    JPanel elfPanel;
-    JPanel undeadPanel;
+    TroopPanel elfPanel;
+    TroopPanel undeadPanel;
     JPanel jsonPanel;
 
     public WarSim() {
@@ -34,13 +43,14 @@ public class WarSim extends JFrame {
     // EFFECTS:  sets activeTool, currentDrawing to null, and instantiates drawings and tools with ArrayList
     //           this method is called by the DrawingEditor constructor
     private void initializeFields() {
-        game = new Game();
-        world = game.getWorld();
-        elf = world.getTroopByIndex(0);
-        elfPanel = new TroopPanel(elf);
-        undead = world.getTroopByIndex(1);
-        undeadPanel = new TroopPanel(undead);
-        jsonPanel = new JsonPanel();
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
+        world = new World();
+        world.addTroop(initElf());
+        world.addTroop(initUndead());
+        elfPanel = new TroopPanel(world,0);
+        undeadPanel = new TroopPanel(world,1);
+        jsonPanel = new JsonPanel(this);
     }
 
     // MODIFIES: this
@@ -48,7 +58,7 @@ public class WarSim extends JFrame {
     //           to manipulate this drawing
     private void initializeGraphics() {
         setLayout(new BorderLayout());
-        setMinimumSize(new Dimension(Game.WIDTH, Game.HEIGHT));
+        setMinimumSize(new Dimension(WIDTH, HEIGHT));
 
         JTabbedPane tabbedPane = new JTabbedPane();
 
@@ -71,6 +81,62 @@ public class WarSim extends JFrame {
         midiSynth.open();
 //        midiSynth.play(15,100,100);
     }
+
+    // MODIFIES: world
+    // EFFECTS: initialize an elf troop
+    public Troop initElf() {
+        Troop elf = new Troop("elf");
+        Warrior elfArcher = new Warrior("elf archer");
+        elfArcher.setAttack(100);
+        elfArcher.setDefense(20);
+        elf.addWarrior(elfArcher);
+        Warrior elfRanger = new Warrior("elf ranger");
+        elfRanger.setAttack(70);
+        elfRanger.setDefense(50);
+        elf.addWarrior(elfRanger);
+        return elf;
+    }
+
+    // MODIFIES: world
+    // EFFECTS: initialize an undead troop
+    public Troop initUndead() {
+        Troop undead = new Troop("undead");
+        Warrior undeadRider = new Warrior("undead rider");
+        undeadRider.setAttack(50);
+        undeadRider.setDefense(80);
+        undead.addWarrior(undeadRider);
+        Warrior undeadBat = new Warrior("undead bat");
+        undeadBat.setAttack(100);
+        undeadBat.setDefense(10);
+        undead.addWarrior(undeadBat);
+        return undead;
+    }
+
+    // EFFECTS: saves the game world to file
+    public void saveWorld() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(world);
+            jsonWriter.close();
+            System.out.println("Saved game to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads game world from file
+    public void loadWorld() {
+        try {
+            world = jsonReader.read();
+            elfPanel.updateTroop(world, 0);
+            undeadPanel.updateTroop(world, 1);
+            System.out.println("Loaded game from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
+
 }
 
 /*

@@ -1,7 +1,7 @@
 package ui.panels;
 
-import model.Game;
 import sound.MidiSynth;
+import ui.WarSim;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,14 +13,15 @@ import java.awt.event.FocusListener;
 // represent a editing panel of some troop
 public class JsonPanel extends JPanel implements ActionListener, FocusListener {
 
+    private WarSim warSim;
     private MidiSynth midiSynth;
 
     protected JTextArea textArea;
     static final int GAP = 10;
 
-    public JsonPanel() {
+    public JsonPanel(WarSim warSim) {
         super();
-        setPreferredSize(new Dimension(Game.WIDTH, Game.HEIGHT));
+        this.warSim = warSim;
         setLayout(new GridLayout(0, 1));
         add(createDisplay());
         add(createButtons());
@@ -107,12 +108,12 @@ public class JsonPanel extends JPanel implements ActionListener, FocusListener {
     // EFFECTS: perform action according to the button being clicked
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("save")) {
-            Game.saveWorld();
-            print("Saved game to " + Game.JSON_STORE);
+            warSim.saveWorld();
+            print("Saved game to " + WarSim.JSON_STORE);
             midiSynth.play(10,40,100);
         } else if (e.getActionCommand().equals("load")) {
-            Game.loadWorld();
-            print("Loaded game from " + Game.JSON_STORE);
+            warSim.loadWorld();
+            print("Loaded game from " + WarSim.JSON_STORE);
             midiSynth.play(10,30,100);
         }
     }
