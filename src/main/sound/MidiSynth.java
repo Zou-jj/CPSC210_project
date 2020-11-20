@@ -32,8 +32,7 @@ package sound;
 
 
 import javax.sound.midi.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Illustrates general MIDI melody instruments and MIDI controllers.
@@ -47,13 +46,13 @@ import java.util.Map;
 public class MidiSynth {
 
     private Synthesizer synthesizer;
-    private Instrument instruments[];
+    private List<Instrument> instruments;
 
-    private ChannelData channels[];
+    private List<ChannelData> channels;
 
     // EFFECTS: return the channel at the given index
     public ChannelData getSpecialisedChannel(int index) {
-        return channels[index];
+        return channels.get(index);
     }
 
 
@@ -82,10 +81,10 @@ public class MidiSynth {
     // MODIFIES: this
     // EFFECTS:  sets up the channels for this MidiSynth
     private void setupChannels() {
-        MidiChannel midiChannels[] = synthesizer.getChannels();
-        channels = new ChannelData[midiChannels.length];
-        for (int i = 0; i < channels.length; i++) {
-            channels[i] = new ChannelData(midiChannels[i], i);
+        List<MidiChannel> midiChannels = Arrays.asList(synthesizer.getChannels());
+        channels = new ArrayList<>();
+        for (int i = 0; i < midiChannels.size(); i++) {
+            channels.add(new ChannelData(midiChannels.get(i), i));
         }
     }
 
@@ -93,8 +92,8 @@ public class MidiSynth {
     // EFFECTS:  populates this with a variety of instruments
     private void setupInstruments() {
         if (getSoundBank() != null) {
-            instruments = synthesizer.getDefaultSoundbank().getInstruments();
-            synthesizer.loadInstrument(instruments[0]);
+            instruments = Arrays.asList(synthesizer.getDefaultSoundbank().getInstruments());
+            synthesizer.loadInstrument(instruments.get(0));
         }
     }
 

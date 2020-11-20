@@ -63,7 +63,7 @@ public class SpringUtilities {
     public static void makeCompactGrid(Container parent,
                                        int rows, int cols,
                                        int initialX, int initialY,
-                                       int xPad, int yPad) {
+                                       int xpad, int ypad) {
         SpringLayout layout;
         try {
             layout = (SpringLayout) parent.getLayout();
@@ -72,18 +72,18 @@ public class SpringUtilities {
             return;
         }
 
-        Spring x = getSpringx(parent, rows, cols, initialX, xPad);
+        Spring x = getSpringx(parent, rows, cols, initialX, xpad);
 
-        Spring y = getSpringy(parent, rows, cols, initialY, yPad);
+        Spring y = getSpringy(parent, rows, cols, initialY, ypad);
 
         //Set the parent's size.
-        SpringLayout.Constraints pCons = layout.getConstraints(parent);
-        pCons.setConstraint(SpringLayout.SOUTH, y);
-        pCons.setConstraint(SpringLayout.EAST, x);
+        SpringLayout.Constraints pcons = layout.getConstraints(parent);
+        pcons.setConstraint(SpringLayout.SOUTH, y);
+        pcons.setConstraint(SpringLayout.EAST, x);
     }
 
     // EFFECTS: Align all cells in each row and make them the same height.
-    private static Spring getSpringy(Container parent, int rows, int cols, int initialY, int yPad) {
+    private static Spring getSpringy(Container parent, int rows, int cols, int initialY, int ypad) {
         Spring y = Spring.constant(initialY);
         for (int r = 0; r < rows; r++) {
             Spring height = Spring.constant(0);
@@ -97,13 +97,13 @@ public class SpringUtilities {
                 constraints.setY(y);
                 constraints.setHeight(height);
             }
-            y = Spring.sum(y, Spring.sum(height, Spring.constant(yPad)));
+            y = Spring.sum(y, Spring.sum(height, Spring.constant(ypad)));
         }
         return y;
     }
 
     // EFFECTS: Align all cells in each column and make them the same width.
-    private static Spring getSpringx(Container parent, int rows, int cols, int initialX, int xPad) {
+    private static Spring getSpringx(Container parent, int rows, int cols, int initialX, int xpad) {
         Spring x = Spring.constant(initialX);
         for (int c = 0; c < cols; c++) {
             Spring width = Spring.constant(0);
@@ -117,7 +117,7 @@ public class SpringUtilities {
                 constraints.setX(x);
                 constraints.setWidth(width);
             }
-            x = Spring.sum(x, Spring.sum(width, Spring.constant(xPad)));
+            x = Spring.sum(x, Spring.sum(width, Spring.constant(xpad)));
         }
         return x;
     }
