@@ -54,6 +54,7 @@ public class Warrior implements Writable {
         }
     }
 
+    // EFFECTS: add this warrior to the json file and returns the json file
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -62,6 +63,7 @@ public class Warrior implements Writable {
         json.put("defense", defense);
         return json;
     }
+
 }
 
 /*

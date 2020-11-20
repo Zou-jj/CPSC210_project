@@ -30,6 +30,7 @@ public class World implements Writable {
         races.add(t);
     }
 
+    // EFFECTS: add this world to the json file and returns the json file
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

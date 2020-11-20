@@ -6,6 +6,7 @@ import persistence.JsonWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+// represent a game with initialized world
 public class Game {
     public static final int WIDTH = 800;
     public static final int HEIGHT = 600;
@@ -23,6 +24,10 @@ public class Game {
         initUndead();
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
+    }
+
+    public World getWorld() {
+        return world;
     }
 
     // MODIFIES: world

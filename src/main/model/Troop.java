@@ -36,6 +36,7 @@ public class Troop implements Writable {
         warriors.add(w);
     }
 
+    // EFFECTS: add this troop to the json file and returns the json file
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

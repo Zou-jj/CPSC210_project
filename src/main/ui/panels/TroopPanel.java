@@ -3,6 +3,7 @@ package ui.panels;
 import model.Game;
 import model.Troop;
 import model.Warrior;
+import sound.MidiSynth;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,6 +14,8 @@ import java.awt.event.FocusListener;
 
 public class TroopPanel extends JPanel implements ActionListener, FocusListener {
     public Troop troop;
+
+    private MidiSynth midiSynth;
 
     private JTextField nameField;
     private JTextField attackField;
@@ -25,11 +28,7 @@ public class TroopPanel extends JPanel implements ActionListener, FocusListener 
         this.troop = troop;
         setPreferredSize(new Dimension(Game.WIDTH, Game.HEIGHT));
         setLayout(new GridLayout(0, 1));
-        // Sets "this" object as an action listener for btn
-        // so that when the btn is clicked,
-        // this.actionPerformed(ActionEvent e) will be called.
-        // You could also set a different object, if you wanted
-        // a different object to respond to the button click
+
         nameField = new JTextField(50);
 
         textArea = new JTextArea(10, 50);
@@ -40,24 +39,7 @@ public class TroopPanel extends JPanel implements ActionListener, FocusListener 
         add(createDisplay());
         add(createButtons());
 
-//        //Add Components to this panel.
-//        GridBagConstraints c = new GridBagConstraints();
-//        c.gridwidth = GridBagConstraints.REMAINDER;
-//
-//        c.fill = GridBagConstraints.HORIZONTAL;
-//        add(nameField, c);
-//
-//        c.fill = GridBagConstraints.BOTH;
-//        c.weightx = 1.0;
-//        c.weighty = 1.0;
-//        add(scrollPane, c);
-
-//        setVisible(true);
-//
-//        add(nameField);
-//        add(attackField);
-//        add(btn);
-//        add(label);
+        initializeSound();
 
     }
 
@@ -110,7 +92,7 @@ public class TroopPanel extends JPanel implements ActionListener, FocusListener 
                 tf = (JTextField) fields[i];
             }
             tf.addActionListener(this);
-//            tf.addFocusListener(this);
+            tf.addFocusListener(this);
         }
         SpringUtilities.makeCompactGrid(panel,
                 labelStrings.length, 2,
@@ -130,6 +112,8 @@ public class TroopPanel extends JPanel implements ActionListener, FocusListener 
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: create a display panel
     protected JComponent createDisplay() {
         textArea = new JTextArea(10, 50);
         textArea.setEditable(false);
@@ -139,6 +123,8 @@ public class TroopPanel extends JPanel implements ActionListener, FocusListener 
         return scrollPane;
     }
 
+    // MODIFIES: this
+    // EFFECTS: update the display panel
     protected void updateDisplays() {
         String text = nameField.getText();
         textArea.append(text + "\n");
@@ -183,6 +169,8 @@ public class TroopPanel extends JPanel implements ActionListener, FocusListener 
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: create buttons on the panel
     protected JComponent createButtons() {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.TRAILING));
         panel.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -193,7 +181,7 @@ public class TroopPanel extends JPanel implements ActionListener, FocusListener 
         button.setActionCommand("add");
         panel.add(button);
 
-        button = new JButton("Clear");
+        button = new JButton("Clear display");
         button.addActionListener(this);
         button.setActionCommand("clear");
         panel.add(button);
@@ -203,8 +191,6 @@ public class TroopPanel extends JPanel implements ActionListener, FocusListener 
         button.setActionCommand("list");
         panel.add(button);
 
-        //Match the SpringLayout's gap, subtracting 5 to make
-        //up for the default gap FlowLayout provides.
         panel.setBorder(BorderFactory.createEmptyBorder(0, 0,
                 GAP - 5, GAP - 5));
         return panel;
@@ -237,10 +223,6 @@ public class TroopPanel extends JPanel implements ActionListener, FocusListener 
             editWarriorAttack(troop.getWarriorByIndex(index));
             editWarriorDefense(troop.getWarriorByIndex(index));
         }
-
-
-//        editWarriorAttack(newWarrior);
-//        editWarriorDefense(newWarrior);
     }
 
     // MODIFIES: this, warrior
@@ -263,7 +245,7 @@ public class TroopPanel extends JPanel implements ActionListener, FocusListener 
     }
 
     // MODIFIES: this, warrior
-    // EFFECTS: prompts user to edit attack of the given warrior
+    // EFFECTS: prompts user to edit defense of the given warrior
     private void editWarriorDefense(Warrior warrior) {
         int defense;
 
@@ -281,6 +263,8 @@ public class TroopPanel extends JPanel implements ActionListener, FocusListener 
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: print the message on the display panel
     private void print(String str) {
         textArea.append("\n" + str + "\n");
         textArea.setCaretPosition(textArea.getDocument().getLength());
@@ -296,18 +280,33 @@ public class TroopPanel extends JPanel implements ActionListener, FocusListener 
         }
     }
 
-    //This is the method that is called when the the JButton btn is clicked
+    // MODIFIES: this
+    // EFFECTS:  initializes this DrawingEditor's midisynth field, then calls open() on it
+    private void initializeSound() {
+        midiSynth = new MidiSynth();
+        midiSynth.open();
+    }
+
+    // MODIFIES: this
+    // EFFECTS: perform action according to the button being clicked
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("add")) {
             addWarrior(troop);
+            midiSynth.play(10,50,100);
         } else if (e.getActionCommand().equals("clear")) {
             clearDisplay();
+            midiSynth.play(10,60,100);
         } else if (e.getActionCommand().equals("list")) {
             listTroop();
+            midiSynth.play(10,70,100);
         }
     }
 
-//    public static void main(String[] args) {
-//        new LabelChanger();
-//    }
 }
+
+/*
+ *Title:SimpleDrawingPlayer-Complete
+ *Author:Norm Hutchinson
+ *Date:Oct 19, 2019
+ *Availability:https://github.students.cs.ubc.ca/CPSC210/SimpleDrawingPlayer-Complete
+ */
