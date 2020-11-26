@@ -51,6 +51,7 @@ class TestWarrior {
     void testEquals() {
         Warrior otherElfArcher = new Warrior("elf archer");
         assertEquals(otherElfArcher, elfArcher);
+        assertEquals(otherElfArcher.hashCode(), elfArcher.hashCode());
     }
 
     @Test
