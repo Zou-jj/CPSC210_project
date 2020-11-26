@@ -11,6 +11,11 @@
                 "defense": 50,
                 "attack": 70,
                 "name": "elf ranger"
+            },
+            {
+                "defense": 123,
+                "attack": 13,
+                "name": "zjj"
             }
         ]
     },
@@ -26,6 +31,11 @@
                 "defense": 10,
                 "attack": 100,
                 "name": "undead bat"
+            },
+            {
+                "defense": 643,
+                "attack": 15342,
+                "name": "512"
             }
         ]
     }

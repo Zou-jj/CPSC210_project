@@ -4,16 +4,17 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 // Represents a troop having a collection of warriors
 public class Troop implements Writable {
     private String race;
-    private ArrayList<Warrior> warriors;
+    public Map<String, Warrior> warriorsHashMap;
 
     public Troop(String race) {
         this.race = race;
-        warriors = new ArrayList<>();
+        warriorsHashMap = new HashMap<>();
     }
 
     public String getRace() {
@@ -21,19 +22,23 @@ public class Troop implements Writable {
     }
 
     public int getTroopSize() {
-        return warriors.size();
+        return warriorsHashMap.size();
     }
 
-    // REQUIRES: index >= 0 and index < getTroopSize
+    // REQUIRES: warrior with the input name is in the map
     // EFFECTS: return the warrior of given index in troop
-    public Warrior getWarriorByIndex(int index) {
-        return warriors.get(index);
+    public Warrior getWarriorByName(String name) {
+        return warriorsHashMap.get(name);
+    }
+
+    public boolean containsName(String name) {
+        return warriorsHashMap.containsKey(name);
     }
 
     // MODIFIES: this
     // EFFECTS: add the given warrior to the end of troop
     public void addWarrior(Warrior w) {
-        warriors.add(w);
+        warriorsHashMap.put(w.getName(), w);
     }
 
     // EFFECTS: add this troop to the json file and returns the json file
@@ -49,7 +54,7 @@ public class Troop implements Writable {
     private JSONArray warriorsToJson() {
         JSONArray jsonArray = new JSONArray();
 
-        for (Warrior w : warriors) {
+        for (Warrior w : warriorsHashMap.values()) {
             jsonArray.put(w.toJson());
         }
 

@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
-// represent a editing panel of some troop
+// represent a Panel for editing the json save file
 public class JsonPanel extends JPanel implements ActionListener, FocusListener {
 
     private WarSim warSim;

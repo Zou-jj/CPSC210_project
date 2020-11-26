@@ -18,14 +18,14 @@
         "race": "undead",
         "warriors": [
             {
-                "defense": 80,
-                "attack": 50,
-                "name": "undead rider"
-            },
-            {
                 "defense": 10,
                 "attack": 100,
                 "name": "undead bat"
+            },
+            {
+                "defense": 80,
+                "attack": 50,
+                "name": "undead rider"
             }
         ]
     }

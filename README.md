@@ -20,3 +20,10 @@ from the Lord of the Rings.
 - As a user, I want to view all troops in the game.
 - As a user, I want to save the state of the game to a file.
 - As a user, I want to reload a game state from a file and resume the game.
+
+##Phase 4: Task2
+A Map interface used in class Troop 
+
+##Phase 4: Task3
+ - refactor the coupling relation between TroopPanel, World and Troop.
+ - make a Panel Interface for TroopPanel and JsonPanel.

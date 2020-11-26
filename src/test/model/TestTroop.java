@@ -3,9 +3,7 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class TestTroop {
     private Warrior elfArcher;
@@ -30,8 +28,14 @@ class TestTroop {
     }
 
     @Test
-    void testGetWarriorByIndex() {
-        assertEquals(elfArcher, elf.getWarriorByIndex(0));
+    void testGetWarriorByName() {
+        assertEquals(elfArcher, elf.getWarriorByName(NAME));
+    }
+
+    @Test
+    void testContainsName() {
+        assertTrue(elf.containsName(NAME));
+        assertFalse(elf.containsName(""));
     }
 
     @Test

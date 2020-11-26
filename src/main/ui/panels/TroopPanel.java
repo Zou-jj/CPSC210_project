@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
+// Represent a menu panel working on one Troop
 public class TroopPanel extends JPanel implements ActionListener, FocusListener {
     public World world;
     public Troop troop;
@@ -211,22 +212,15 @@ public class TroopPanel extends JPanel implements ActionListener, FocusListener 
 
         name = nameField.getText();
 
-        for (; index < troop.getTroopSize(); index++) {
-            if (troop.getWarriorByIndex(index).getName().equals(name)) {
-                contain = true;
-                break;
-            }
-        }
-
-        if (!contain) {
+        if (troop.containsName(name)) {
+            editWarriorAttack(troop.getWarriorByName(name));
+            editWarriorDefense(troop.getWarriorByName(name));
+        } else {
             newWarrior = new Warrior(name);
             troop.addWarrior(newWarrior);
             print("Added a " + newWarrior.getName() + " to " + troop.getRace());
             editWarriorAttack(newWarrior);
             editWarriorDefense(newWarrior);
-        } else {
-            editWarriorAttack(troop.getWarriorByIndex(index));
-            editWarriorDefense(troop.getWarriorByIndex(index));
         }
     }
 
@@ -278,10 +272,10 @@ public class TroopPanel extends JPanel implements ActionListener, FocusListener 
     // EFFECTS: list all warriors in the given troop and process user input
     private void listTroop() {
         print("Warriors available:\n");
-        for (int index = 0; index < troop.getTroopSize(); index++) {
-            print("\t Name: " + troop.getWarriorByIndex(index).getName());
-            print("\t Attack: " + troop.getWarriorByIndex(index).getAttack());
-            print("\t Defense: " + troop.getWarriorByIndex(index).getDefense() + "\n");
+        for (Warrior w : troop.warriorsHashMap.values()) {
+            print("\t Name: " + w.getName());
+            print("\t Attack: " + w.getAttack());
+            print("\t Defense: " + w.getDefense() + "\n");
         }
     }
 

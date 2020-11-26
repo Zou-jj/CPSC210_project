@@ -3,6 +3,8 @@ package model;
 import org.json.JSONObject;
 import persistence.Writable;
 
+import java.util.Objects;
+
 // Represents a warrior with some abilities
 public class Warrior implements Writable {
     private String name;
@@ -64,6 +66,22 @@ public class Warrior implements Writable {
         return json;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Warrior warrior = (Warrior) o;
+        return Objects.equals(name, warrior.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
+    }
 }
 
 /*

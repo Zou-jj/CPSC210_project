@@ -1,13 +1,10 @@
 package persistence;
 
-import model.Troop;
 import model.World;
 import org.junit.jupiter.api.Test;
-import ui.GamePanel;
+import ui.WarSim;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -47,8 +44,8 @@ public class TestJsonWriter extends TestJson {
     void testWriterGeneralWorld() {
         try {
             World world = new World();
-            GamePanel.initElf(world);
-            GamePanel.initUndead(world);
+            world.addTroop(WarSim.initElf());
+            world.addTroop(WarSim.initUndead());
             JsonWriter writer = new JsonWriter("./data/testWriterGeneralWorld.json");
             writer.open();
             writer.write(world);
@@ -60,10 +57,14 @@ public class TestJsonWriter extends TestJson {
             assertEquals("undead", world.getTroopByIndex(1).getRace());
             assertEquals(2, world.getTroopByIndex(0).getTroopSize());
             assertEquals(2, world.getTroopByIndex(1).getTroopSize());
-            checkWarrior("elf archer", 100, 20, world.getTroopByIndex(0).getWarriorByIndex(0));
-            checkWarrior("elf ranger", 70, 50, world.getTroopByIndex(0).getWarriorByIndex(1));
-            checkWarrior("undead rider", 50, 80, world.getTroopByIndex(1).getWarriorByIndex(0));
-            checkWarrior("undead bat", 100, 10, world.getTroopByIndex(1).getWarriorByIndex(1));
+            checkWarrior("elf archer", 100, 20,
+                    world.getTroopByIndex(0).getWarriorByName("elf archer"));
+            checkWarrior("elf ranger", 70, 50,
+                    world.getTroopByIndex(0).getWarriorByName("elf ranger"));
+            checkWarrior("undead rider", 50, 80,
+                    world.getTroopByIndex(1).getWarriorByName("undead rider"));
+            checkWarrior("undead bat", 100, 10,
+                    world.getTroopByIndex(1).getWarriorByName("undead bat"));
 
         } catch (IOException e) {
             fail("Exception should not have been thrown");

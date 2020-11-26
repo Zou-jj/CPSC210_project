@@ -84,7 +84,7 @@ public class WarSim extends JFrame {
 
     // MODIFIES: world
     // EFFECTS: initialize an elf troop
-    public Troop initElf() {
+    public static Troop initElf() {
         Troop elf = new Troop("elf");
         Warrior elfArcher = new Warrior("elf archer");
         elfArcher.setAttack(100);
@@ -99,7 +99,7 @@ public class WarSim extends JFrame {
 
     // MODIFIES: world
     // EFFECTS: initialize an undead troop
-    public Troop initUndead() {
+    public static Troop initUndead() {
         Troop undead = new Troop("undead");
         Warrior undeadRider = new Warrior("undead rider");
         undeadRider.setAttack(50);

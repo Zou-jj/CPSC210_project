@@ -2,6 +2,7 @@ package ui.sound;
 
 import javax.sound.midi.MidiChannel;
 
+// Represent data for some midichannel
 public class ChannelData {
 
     private MidiChannel channel;
