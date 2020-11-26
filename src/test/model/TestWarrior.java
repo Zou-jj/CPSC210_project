@@ -46,4 +46,29 @@ class TestWarrior {
         elfArcher.rename(RENAME);
         assertEquals(RENAME, elfArcher.getName());
     }
+
+    @Test
+    void testEquals() {
+        Warrior otherElfArcher = new Warrior("elf archer");
+        assertEquals(otherElfArcher, elfArcher);
+    }
+
+    @Test
+    void testRenameEquals() {
+        Warrior warrior = new Warrior(RENAME);
+        elfArcher.rename(RENAME);
+        assertEquals(warrior, elfArcher);
+    }
+
+    @Test
+    void testNull() {
+        Warrior warrior = null;
+        assertFalse(elfArcher.equals(warrior));
+    }
+
+    @Test
+    void testSame() {
+        Warrior same = elfArcher;
+        assertEquals(same, elfArcher);
+    }
 }
