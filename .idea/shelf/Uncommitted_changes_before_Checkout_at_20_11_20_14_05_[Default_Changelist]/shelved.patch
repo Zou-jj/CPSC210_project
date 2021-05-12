@@ -1,0 +1,36 @@
+Index: src/main/ui/WarSim.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package ui;\r\n\r\nimport model.Game;\r\nimport model.Troop;\r\nimport ui.panels.JsonPanel;\r\nimport ui.panels.LabelChanger;\r\nimport ui.panels.TroopPanel;\r\nimport ui.tools.LoadTool;\r\nimport ui.tools.SaveTool;\r\nimport ui.tools.Tool;\r\n\r\nimport javax.swing.*;\r\nimport java.awt.*;\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class WarSim extends JFrame {\r\n\r\n    private List<Tool> tools;\r\n    private Tool activeTool;\r\n\r\n    private Game game;\r\n    private Troop elf;\r\n    private Troop undead;\r\n\r\n    private JPanel currentPanel;\r\n    JPanel simpleBorders = new JPanel();\r\n    JPanel toolArea = new JPanel();\r\n    JPanel test = new JPanel();\r\n    JPanel elfPanel;\r\n    JPanel undeadPanel;\r\n    JPanel jsonPanel;\r\n    public static LabelChanger ltest = new LabelChanger();\r\n\r\n    public WarSim() {\r\n        super(\"War Simulator\");\r\n        initializeFields();\r\n        initializeGraphics();\r\n//        initializeSound();\r\n//        initializeInteraction();\r\n    }\r\n\r\n    // MODIFIES: this\r\n    // EFFECTS:  sets activeTool, currentDrawing to null, and instantiates drawings and tools with ArrayList\r\n    //           this method is called by the DrawingEditor constructor\r\n    private void initializeFields() {\r\n        activeTool = null;\r\n        currentPanel = null;\r\n        tools = new ArrayList<Tool>();\r\n        game = new Game();\r\n        elf = Game.world.getTroopByIndex(0);\r\n        elfPanel = new TroopPanel(elf);\r\n        undead = Game.world.getTroopByIndex(1);\r\n        undeadPanel = new TroopPanel(undead);\r\n        jsonPanel = new JsonPanel();\r\n    }\r\n\r\n    // MODIFIES: this\r\n    // EFFECTS:  draws the JFrame window where this DrawingEditor will operate, and populates the tools to be used\r\n    //           to manipulate this drawing\r\n    private void initializeGraphics() {\r\n        setLayout(new BorderLayout());\r\n        setMinimumSize(new Dimension(Game.WIDTH, Game.HEIGHT));\r\n\r\n\r\n\r\n//        Border paneEdge = BorderFactory.createEmptyBorder(0,10,10,10);\r\n//\r\n//        simpleBorders.setBorder(paneEdge);\r\n//        simpleBorders.setLayout(new BoxLayout(simpleBorders,\r\n//                BoxLayout.Y_AXIS));\r\n\r\n        JTabbedPane tabbedPane = new JTabbedPane();\r\n\r\n        tabbedPane.addTab(\"File\", null, jsonPanel, null);\r\n        tabbedPane.addTab(\"Elf\", null, elfPanel, null);\r\n        tabbedPane.addTab(\"Undead\", null, undeadPanel, null);\r\n        add(tabbedPane);\r\n        setContentPane(tabbedPane);\r\n\r\n//        updatePanel();\r\n//        createTools();\r\n\r\n\r\n        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);\r\n        pack();\r\n        setLocationRelativeTo(null);\r\n        setVisible(true);\r\n    }\r\n\r\n    // MODIFIES: this\r\n    // EFFECTS:  sets the given tool as the activeTool\r\n    public void setActiveTool(Tool tool) {\r\n        if (activeTool != null) {\r\n            activeTool.deactivate();\r\n        }\r\n        tool.activate();\r\n        activeTool = tool;\r\n    }\r\n\r\n    // MODIFIES: this\r\n    // EFFECTS:  a helper method which declares and instantiates all tools\r\n    private void createTools() {\r\n\r\n        toolArea.setLayout(new GridLayout(0,1));\r\n        toolArea.setSize(new Dimension(0, 0));\r\n        add(toolArea, BorderLayout.EAST);\r\n        add(toolArea, test);\r\n\r\n        SaveTool saveTool = new SaveTool(this, simpleBorders);\r\n\r\n        tools.add(saveTool);\r\n\r\n        LoadTool loadTool = new LoadTool(this, simpleBorders);\r\n\r\n        tools.add(loadTool);\r\n\r\n//        setActiveTool(null);\r\n    }\r\n\r\n    // MODIFIES: this\r\n    // EFFECTS:  declares and instantiates a Drawing (newDrawing), and adds it to drawings\r\n    private void updatePanel() {\r\n        JPanel jPanel = new LabelChanger();\r\n        currentPanel = jPanel;\r\n        add(ltest, test);\r\n        test.add(new TroopPanel(elf));\r\n        add(new TroopPanel(undead), test);\r\n        validate();\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/ui/WarSim.java	(revision 0e56ed4b7557a1fa462383e6d980c3b31719bed2)
++++ src/main/ui/WarSim.java	(date 1605909853234)
+@@ -3,7 +3,6 @@
+ import model.Game;
+ import model.Troop;
+ import ui.panels.JsonPanel;
+-import ui.panels.LabelChanger;
+ import ui.panels.TroopPanel;
+ import ui.tools.LoadTool;
+ import ui.tools.SaveTool;
+@@ -30,7 +29,6 @@
+     JPanel elfPanel;
+     JPanel undeadPanel;
+     JPanel jsonPanel;
+-    public static LabelChanger ltest = new LabelChanger();
+ 
+     public WarSim() {
+         super("War Simulator");
+@@ -121,9 +119,6 @@
+     // MODIFIES: this
+     // EFFECTS:  declares and instantiates a Drawing (newDrawing), and adds it to drawings
+     private void updatePanel() {
+-        JPanel jPanel = new LabelChanger();
+-        currentPanel = jPanel;
+-        add(ltest, test);
+         test.add(new TroopPanel(elf));
+         add(new TroopPanel(undead), test);
+         validate();
+diff --git data/world.json data/world.json
